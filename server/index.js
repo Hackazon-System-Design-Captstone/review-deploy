@@ -53,6 +53,9 @@ app.get(`/helpful/*`, bodyParser.json(), (req, res) => {
   .catch(({err}) => {res.status(300).send(err)});
 });
 
+app.get('/loaderio-bad0217256432a2cc5cd44ca437db311', (req, res) => {
+  res.send('loaderio-bad0217256432a2cc5cd44ca437db311');
+});
     // create a new review
 // app.post(`/reviews/new`, bodyParser.json(), (req, res) => {
 //   let data = req.body;
