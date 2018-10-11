@@ -6,7 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 bluebird.promisifyAll(redis);
-let port = 1337;
+let port = 7763;
 let app = express();
 
 app.use(compression());
