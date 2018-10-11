@@ -9,11 +9,11 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['My Application'],
+  app_name: ['SDC Hackazon reveiw Deployed'],
   /**
    * Your New Relic license key.
    */
-  license_key: 'license key here',
+  license_key: 'bedd27876fe16e1a6457748decb4f0d26a3f765e',
   logging: {
     /**
      * Level at which to log. 'trace' is most useful to New Relic when diagnosing
