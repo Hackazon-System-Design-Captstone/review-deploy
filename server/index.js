@@ -19,7 +19,7 @@ app.options(`/reviews/*`, bodyParser.json(), (req, res) => {
 });
 let client = redis.createClient();
 client.on('error',function(err){ console.error(err)})
-let clusters = ['http://ec2-204-236-202-7.compute-1.amazonaws.com:7766', 'http://ec2-34-202-161-112.compute-1.amazonaws.com:7766', 'http://ec2-52-23-220-90.compute-1.amazonaws.com:7766', 'http://ec2-35-153-206-206.compute-1.amazonaws.com:7766', 'http://ec2-35-168-15-15.compute-1.amazonaws.com:7766']
+let clusters = ['http://ip-172-31-37-27.ec2.internal:7766', 'http://ip-172-31-41-253.ec2.internal:7766', 'http://ip-172-31-44-86.ec2.internal:7766', 'http://ip-172-31-37-68.ec2.internal:7766', 'http://ip-172-31-45-51.ec2.internal:7766']
 let index = 0;
 
     // return reviews with posted productId
