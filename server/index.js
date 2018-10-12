@@ -19,7 +19,7 @@ app.options(`/reviews/*`, bodyParser.json(), (req, res) => {
 });
 let client = redis.createClient();
 client.on('error',function(err){ console.error(err)})
-let clusters = ['http://ec2-204-236-202-7.compute-1.amazonaws.com:7764', 'http://ec2-34-202-161-112.compute-1.amazonaws.com:7765', 'http://ec2-52-23-220-90.compute-1.amazonaws.com:7766', 'http://ec2-35-153-206-206.compute-1.amazonaws.com:7766']
+let clusters = ['http://ec2-204-236-202-7.compute-1.amazonaws.com:7766', 'http://ec2-34-202-161-112.compute-1.amazonaws.com:7766', 'http://ec2-52-23-220-90.compute-1.amazonaws.com:7766', 'http://ec2-35-153-206-206.compute-1.amazonaws.com:7766', 'http://ec2-35-168-15-15.compute-1.amazonaws.com:7766']
 let index = 0;
 
     // return reviews with posted productId
@@ -31,7 +31,7 @@ app.get(`/reviews/*`, bodyParser.json(), (req, res) => {
       res.status(210).send(JSON.parse(data))
     } else {
     index++;
-    index = index % 4;
+    index = index % 5;
     axios.get(clusters[index] + `/reviews/${productId}`)
     .then(({data})=>{
       client.setAsync('key ' + productId,  JSON.stringify(data) );
@@ -45,7 +45,7 @@ app.get(`/reviews/*`, bodyParser.json(), (req, res) => {
     // increment helpfullness
 app.get(`/helpful/*`, bodyParser.json(), (req, res) => {
   index++;
-  index = index % 4;
+  index = index % 5;
   let productId = req.originalUrl.split('/')[2];
   let reviewId = req.originalUrl.split('/')[3];
   axios.get(clusters[index] + `/helpful/${productId}/${reviewId}`)
