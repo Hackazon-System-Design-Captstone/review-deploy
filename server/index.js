@@ -31,11 +31,13 @@ app.get(`/reviews/*`, bodyParser.json(), (req, res) => {
       res.status(210).send(JSON.parse(data))
     } else {
     index++;
-    index = index % 5;
+    if (index === 6) {
+      index = 0
+    };
     axios.get(clusters[index] + `/reviews/${productId}`)
     .then(({data})=>{
-      client.setAsync('key ' + productId,  JSON.stringify(data) );
       res.send(data);
+      client.setAsync('key ' + productId,  JSON.stringify(data) );
     })
     .catch(({err})=>{res.status(500).send(err)});
     }
@@ -45,7 +47,9 @@ app.get(`/reviews/*`, bodyParser.json(), (req, res) => {
     // increment helpfullness
 app.get(`/helpful/*`, bodyParser.json(), (req, res) => {
   index++;
-  index = index % 5;
+  if (index === 6) {
+    index = 0
+  };
   let productId = req.originalUrl.split('/')[2];
   let reviewId = req.originalUrl.split('/')[3];
   axios.get(clusters[index] + `/helpful/${productId}/${reviewId}`)
