@@ -24,14 +24,14 @@ let index = 0;
 
     // return reviews with posted productId
 app.get(`/reviews/*`, bodyParser.json(), (req, res) => {
-  index++;
-  index = index % 4;
   let productId = req.originalUrl.split('/')[2]; 
   if (!!!productId) {productId = 1}
   client.getAsync('key '+ productId).then( (data) => {
     if (data !== null) {
       res.status(210).send(JSON.parse(data))
     } else {
+    index++;
+    index = index % 4;
     axios.get(clusters[index] + `/reviews/${productId}`)
     .then(({data})=>{
       client.setAsync('key ' + productId,  JSON.stringify(data) );
