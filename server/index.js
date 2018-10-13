@@ -19,8 +19,8 @@ app.options(`/reviews/*`, bodyParser.json(), (req, res) => {
 });
 let client = redis.createClient();
 client.on('error',function(err){ console.error(err)})
-let clusters = ['http://ip-172-31-8-83.us-west-1.compute.internal:7766', 'http://ip-172-31-10-90.us-west-1.compute.internal:7766', 'http://ip-172-31-5-135.us-west-1.compute.internal:7766', 'http://ip-172-31-27-34.us-west-1.compute.internal:7766', 'http://ip-172-31-14-42.us-west-1.compute.internal:7766']
-// let clusters = ['http://ec2-13-57-204-123.us-west-1.compute.amazonaws.com:7766', 'http://ec2-54-215-248-218.us-west-1.compute.amazonaws.com:7766', 'http://ec2-54-215-248-223.us-west-1.compute.amazonaws.com:7766', 'http://ec2-18-144-18-49.us-west-1.compute.amazonaws.com:7766', 'http://ec2-54-153-57-18.us-west-1.compute.amazonaws.com:7766']
+// let clusters = ['http://ip-172-31-8-83.us-west-1.compute.internal:7766', 'http://ip-172-31-10-90.us-west-1.compute.internal:7766', 'http://ip-172-31-5-135.us-west-1.compute.internal:7766', 'http://ip-172-31-27-34.us-west-1.compute.internal:7766', 'http://ip-172-31-14-42.us-west-1.compute.internal:7766']
+let clusters = ['http://ec2-13-57-204-123.us-west-1.compute.amazonaws.com:7766', 'http://ec2-54-215-248-218.us-west-1.compute.amazonaws.com:7766', 'http://ec2-54-215-248-223.us-west-1.compute.amazonaws.com:7766', 'http://ec2-18-144-18-49.us-west-1.compute.amazonaws.com:7766', 'http://ec2-54-153-57-18.us-west-1.compute.amazonaws.com:7766']
 
 let index = 0;
 
@@ -36,8 +36,8 @@ app.get(`/reviews/*`, bodyParser.json(), (req, res) => {
     index = index % 5;
     axios.get(clusters[index] + `/reviews/${productId}`)
     .then(({data})=>{
-      res.send(data);
       client.setAsync('key ' + productId,  JSON.stringify(data) );
+      res.send(data);
     })
     .catch(({err})=>{res.status(500).send(err)});
     }
@@ -55,8 +55,8 @@ app.get(`/helpful/*`, bodyParser.json(), (req, res) => {
   .catch(({err}) => {res.status(300).send(err)});
 });
 
-app.get('/loaderio-bad0217256432a2cc5cd44ca437db311', (req, res) => {
-  res.send('loaderio-bad0217256432a2cc5cd44ca437db311');
+app.get('/loaderio-6f316b5f262f6eef0f5f3ae148669df9', (req, res) => {
+  res.send('loaderio-6f316b5f262f6eef0f5f3ae148669df9');
 });
     // create a new review
 // app.post(`/reviews/new`, bodyParser.json(), (req, res) => {
